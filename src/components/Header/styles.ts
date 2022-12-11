@@ -8,7 +8,14 @@ export const Container = styled.header`
     padding: 2rem 1rem;
 
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     justify-content: space-between;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
   }
 `
 
@@ -24,19 +31,6 @@ export const Navigation = styled.nav`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
-  a {
-    background: ${(props) => props.theme.colors['yellow-light']};
-    padding: 0.625rem;
-    border-radius: 6px;
-
-    display: flex;
-    align-items: center;
-
-    svg {
-      color: ${(props) => props.theme.colors['yellow-dark']};
-    }
-  }
 `
 
 export const Location = styled.span`

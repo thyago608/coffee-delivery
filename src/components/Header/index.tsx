@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { Container, Logo, Location, Navigation } from './styles'
+import { Cart } from 'components/Cart'
 
 export function Header() {
   return (
@@ -12,9 +13,7 @@ export function Header() {
             <MapPin size={32} />
             Porto Alegre, RS
           </Location>
-          <Link to="/checkout">
-            <ShoppingCart size={32} weight="fill" />
-          </Link>
+          <Cart />
         </Navigation>
       </div>
     </Container>
