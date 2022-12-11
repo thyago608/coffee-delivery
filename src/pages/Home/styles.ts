@@ -119,3 +119,19 @@ export const CoffeeImage = styled.div`
     margin-left: auto;
   }
 `
+
+export const SectionCoffee = styled.section`
+  margin-top: 4rem;
+`
+
+export const Heading = styled.header`
+  h2 {
+    color: ${(props) => props.theme.colors['base-subtitle']};
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 130%;
+  }
+`
+
+export const CoffeeList = styled.div``

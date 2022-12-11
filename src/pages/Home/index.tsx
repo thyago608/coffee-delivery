@@ -1,4 +1,10 @@
-import { Timer, ShoppingCart, Package, Coffee } from 'phosphor-react'
+import {
+  Timer,
+  ShoppingCart,
+  Package,
+  Coffee as CoffeeIcon,
+} from 'phosphor-react'
+import { Coffee } from 'components/Coffee'
 
 import {
   Main,
@@ -9,6 +15,9 @@ import {
   Description,
   WeOffer,
   Label,
+  SectionCoffee,
+  CoffeeList,
+  Heading,
 } from './styles'
 
 export function Home() {
@@ -35,12 +44,21 @@ export function Home() {
               Embalagem mantém o café intacto
             </Label>
             <Label backgroundSvg="purple">
-              <Coffee size={32} weight="fill" />O café chega fresquinho até você
+              <CoffeeIcon size={32} weight="fill" />O café chega fresquinho até
+              você
             </Label>
           </WeOffer>
         </IntroContent>
         <CoffeeImage />
       </SectionIntro>
+      <SectionCoffee>
+        <Heading>
+          <h2>Nossos cafés</h2>
+        </Heading>
+        <CoffeeList>
+          <Coffee />
+        </CoffeeList>
+      </SectionCoffee>
     </Main>
   )
 }

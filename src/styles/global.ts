@@ -21,6 +21,9 @@ export const GlobalStyle = createGlobalStyle`
 
     button{
         cursor: pointer;
+
+        border: 0;
+        background:none;
     }
 
     a{
@@ -30,4 +33,5 @@ export const GlobalStyle = createGlobalStyle`
     ul{
         list-style:none
     }
+   
 `
