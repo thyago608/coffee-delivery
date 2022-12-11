@@ -21,7 +21,7 @@ export const defaultTheme = {
     white: '#FFFFFF',
   },
   fonts: {
-    baloo: 'Baloo2',
+    baloo: 'Baloo 2',
     roboto: 'Roboto',
   },
 }

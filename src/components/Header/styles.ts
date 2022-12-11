@@ -15,12 +15,14 @@ export const Container = styled.header`
 
     @media (min-width: 768px) {
       flex-direction: row;
+      padding: 2rem;
     }
   }
 `
 
 export const Logo = styled(Link)`
-  width: 120px;
+  width: 90px;
+
   height: 40px;
 
   background: url('/logo.svg') no-repeat center;
