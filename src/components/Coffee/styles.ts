@@ -1,14 +1,12 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  margin-top: 2rem;
-
   width: 100%;
-  max-width: 265px;
+  max-width: 260px;
 
   background: ${(props) => props.theme.colors['base-card']};
   border-radius: 6px 36px 6px 36px;
-  padding: 10px;
+  padding: 0.625rem;
   padding-top: 0;
 
   display: flex;
@@ -19,7 +17,7 @@ export const Container = styled.div`
     width: 120px;
     height: 120px;
 
-    margin-top: -25px;
+    margin-top: -1.5625rem;
   }
 `
 
@@ -30,7 +28,7 @@ export const Label = styled.span`
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 0.25rem 0.75rem;
   border-radius: 16px;
 `
 
@@ -39,17 +37,17 @@ export const Title = styled.h3`
 
   font-family: 'Baloo 2', cursive;
   color: ${(props) => props.theme.colors['base-subtitle']};
-  font-size: 20px;
+  font-size: 1.25rem;
 `
 
 export const Description = styled.p`
-  margin-top: 8px;
+  margin-top: 0.5rem;
   color: ${(props) => props.theme.colors['base-label']};
   text-align: center;
 `
 
 export const Footer = styled.footer`
-  margin-top: 37px;
+  margin-top: 2.3125rem;
   width: 100%;
 
   display: flex;
@@ -58,7 +56,7 @@ export const Footer = styled.footer`
 `
 
 export const Price = styled.strong`
-  margin-right: 23px;
+  margin-right: 1.4375rem;
   font-size: 0.9rem;
 
   display: flex;
@@ -73,14 +71,13 @@ export const Price = styled.strong`
 `
 
 export const ContainerButtons = styled.div`
-  margin-right: 8px;
+  margin-right: 0.5rem;
   background: ${(props) => props.theme.colors['base-button']};
 
   display: flex;
   align-items: center;
   gap: 0.2rem;
   color: ${(props) => props.theme.colors['base-title']};
-  overflow: hidden;
   border-radius: 6px;
 
   button {
@@ -96,5 +93,11 @@ export const CartButton = styled.button`
   background: ${(props) => props.theme.colors['purple-dark']};
   color: ${(props) => props.theme.colors.white};
   border-radius: 6px;
-  padding: 0.1rem;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

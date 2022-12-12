@@ -27,15 +27,15 @@ export function Coffee() {
         </Price>
         <ContainerButtons>
           <button type="button">
-            <Minus size={20} weight="bold" />
+            <Minus size={14} weight="bold" />
           </button>
-          <span>3</span>
+          <span>1</span>
           <button type="button">
-            <Plus size={20} weight="bold" />
+            <Plus size={14} weight="bold" />
           </button>
         </ContainerButtons>
         <CartButton>
-          <ShoppingCart size={30} weight="fill" />
+          <ShoppingCart size={22} weight="fill" />
         </CartButton>
       </Footer>
     </Container>
