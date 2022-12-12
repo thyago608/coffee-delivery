@@ -80,12 +80,16 @@ export const ContainerButtons = styled.div`
   color: ${(props) => props.theme.colors['base-title']};
   border-radius: 6px;
 
-  button {
-    padding: 0.5rem;
-  }
-
   svg {
     color: ${(props) => props.theme.colors.purple};
+  }
+
+  button {
+    padding: 0.5rem;
+
+    &:hover svg {
+      color: ${(props) => props.theme.colors['purple-dark']};
+    }
   }
 `
 
@@ -100,4 +104,10 @@ export const CartButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: ${(props) => props.theme.colors.purple};
+  }
 `
