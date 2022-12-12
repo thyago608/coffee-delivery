@@ -19,7 +19,6 @@ import {
   CoffeeList,
   Heading,
 } from './styles'
-import { CartItem } from 'components/CartItem'
 
 export function Home() {
   return (
@@ -56,7 +55,7 @@ export function Home() {
         <Heading>
           <h2>Nossos cafés</h2>
         </Heading>
-        {/* <CoffeeList>
+        <CoffeeList>
           <CoffeeCard />
           <CoffeeCard />
           <CoffeeCard />
@@ -64,9 +63,7 @@ export function Home() {
           <CoffeeCard />
           <CoffeeCard />
           <CoffeeCard />
-        </CoffeeList> */}
-
-        <CartItem />
+        </CoffeeList>
       </SectionCoffee>
     </Main>
   )

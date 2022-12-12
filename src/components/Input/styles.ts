@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   background: ${(props) => props.theme.colors['base-input']};
+
+  border: 1px solid ${(props) => props.theme.colors['base-button']};
 
   border-radius: 4px;
   overflow: hidden;
