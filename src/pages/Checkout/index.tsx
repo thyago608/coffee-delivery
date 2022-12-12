@@ -1,6 +1,7 @@
 import { MapPin, CreditCard, Money, Bank, CurrencyDollar } from 'phosphor-react'
 import { Input } from 'components/Input'
 import { PaymentButton } from 'components/PaymentButton'
+import { CartItem } from 'components/CartItem'
 import {
   Main,
   CompleteOrder,
@@ -12,6 +13,11 @@ import {
   InputBlock,
   PaymentContainer,
   OptionsPayment,
+  CoffeeSelections,
+  CoffeeList,
+  CartItemContainer,
+  Totals,
+  ConfirmOrder,
 } from './styles'
 
 export function Checkout() {
@@ -81,6 +87,38 @@ export function Checkout() {
           </OptionsPayment>
         </PaymentContainer>
       </CompleteOrder>
+
+      <CoffeeSelections>
+        <header>
+          <h2>Cafés selecionados</h2>
+        </header>
+        <CoffeeList>
+          <CartItemContainer>
+            <CartItem />
+          </CartItemContainer>
+          <CartItemContainer>
+            <CartItem />
+          </CartItemContainer>
+        </CoffeeList>
+        <Totals>
+          <label>
+            Total de itens
+            <span>R$ 29,70</span>
+          </label>
+
+          <label>
+            Entrega
+            <span>R$ 3,50</span>
+          </label>
+
+          <label>
+            Total
+            <span>R$ 33,20</span>
+          </label>
+
+          <ConfirmOrder>Confirmar Pedido</ConfirmOrder>
+        </Totals>
+      </CoffeeSelections>
     </Main>
   )
 }

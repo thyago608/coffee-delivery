@@ -18,7 +18,7 @@ export function CartItem() {
         <AmountContainer>
           <AmountButtons />
           <RemoveButton>
-            <Trash size={20} />
+            <Trash size={15} />
             Remover
           </RemoveButton>
         </AmountContainer>

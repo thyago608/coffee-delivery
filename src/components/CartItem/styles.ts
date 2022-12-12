@@ -7,6 +7,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 1.25rem;
+
+  img {
+    width: 64px;
+    height: 64px;
+  }
 `
 
 export const Title = styled.span`
@@ -17,6 +22,7 @@ export const AmountContainer = styled.div`
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 `
 
 export const RemoveButton = styled.button`
@@ -29,6 +35,7 @@ export const RemoveButton = styled.button`
   gap: 0.25rem;
 
   color: ${(props) => props.theme.colors['base-text']};
+  font-size: 0.75rem;
   text-transform: uppercase;
 
   transition: background 0.3s ease;
