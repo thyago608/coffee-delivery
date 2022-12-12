@@ -1,7 +1,7 @@
 import { ShoppingCart } from 'phosphor-react'
 import { Container, Label } from './styles'
 
-export function Cart() {
+export function CartButton() {
   return (
     <Container to="/checkout">
       <ShoppingCart size={32} weight="fill" />

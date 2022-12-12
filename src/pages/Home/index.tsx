@@ -3,7 +3,6 @@ import {
   ShoppingCart,
   Package,
   Coffee as CoffeeIcon,
-  CreditCard,
 } from 'phosphor-react'
 import { CoffeeCard } from 'components/CoffeeCard'
 
@@ -20,7 +19,7 @@ import {
   CoffeeList,
   Heading,
 } from './styles'
-import { PaymentButton } from 'components/PaymentButton'
+import { CartItem } from 'components/CartItem'
 
 export function Home() {
   return (
@@ -67,10 +66,7 @@ export function Home() {
           <CoffeeCard />
         </CoffeeList> */}
 
-        <PaymentButton>
-          <CreditCard size={18} />
-          Cartão de crédito
-        </PaymentButton>
+        <CartItem />
       </SectionCoffee>
     </Main>
   )

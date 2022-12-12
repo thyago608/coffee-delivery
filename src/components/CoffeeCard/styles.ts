@@ -69,31 +69,9 @@ export const Price = styled.strong`
     font-size: 1.4rem;
   }
 `
-
-export const ContainerButtons = styled.div`
-  margin-right: 0.5rem;
-  background: ${(props) => props.theme.colors['base-button']};
-
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-  color: ${(props) => props.theme.colors['base-title']};
-  border-radius: 6px;
-
-  svg {
-    color: ${(props) => props.theme.colors.purple};
-  }
-
-  button {
-    padding: 0.5rem;
-
-    &:hover svg {
-      color: ${(props) => props.theme.colors['purple-dark']};
-    }
-  }
-`
-
 export const CartButton = styled.button`
+  margin-left: 0.5rem;
+
   background: ${(props) => props.theme.colors['purple-dark']};
   color: ${(props) => props.theme.colors.white};
   border-radius: 6px;
