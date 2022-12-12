@@ -15,10 +15,10 @@ export const Main = styled.main`
 export const SectionIntro = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
 
   @media (min-width: 768px) {
-    gap: 5rem;
+    gap: 2rem;
   }
 
   @media (min-width: 1024px) {
@@ -49,8 +49,8 @@ export const Title = styled.h2`
 `
 
 export const Description = styled.p`
-  color: ${(props) => props.theme.colors['base-subtitle']};
   margin-top: 1rem;
+  color: ${(props) => props.theme.colors['base-subtitle']};
 
   @media (min-width: 768px) {
     text-align: center;
@@ -87,7 +87,6 @@ export const Label = styled.li<LabelProps>`
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: nowrap;
 
   svg {
     padding: 0.4rem;
@@ -99,6 +98,7 @@ export const Label = styled.li<LabelProps>`
 
   @media (min-width: 768px) {
     justify-content: center;
+    white-space: nowrap;
   }
 
   @media (min-width: 1024px) {
@@ -108,30 +108,51 @@ export const Label = styled.li<LabelProps>`
 
 export const CoffeeImage = styled.div`
   width: 100%;
-  height: 300px;
+  max-width: 400px;
+  height: 360px;
 
   background: url(${coffeeHero}) no-repeat center;
   background-size: contain;
 
   @media (min-width: 1024px) {
-    max-width: 400px;
-    height: 360px;
     margin-left: auto;
   }
 `
 
 export const SectionCoffee = styled.section`
-  margin-top: 4rem;
+  margin-top: 2rem;
+
+  @media (min-width: 1024px) {
+    margin-top: 5rem;
+  }
 `
 
 export const Heading = styled.header`
   h2 {
     color: ${(props) => props.theme.colors['base-subtitle']};
     font-family: 'Baloo 2', cursive;
-    font-size: 1.4rem;
+    font-size: 32px;
     font-weight: 900;
     line-height: 130%;
   }
 `
 
-export const CoffeeList = styled.div``
+export const CoffeeList = styled.div`
+  margin-top: 3.375rem;
+
+  display: grid;
+  gap: 40px;
+  justify-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`

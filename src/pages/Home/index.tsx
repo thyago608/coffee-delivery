@@ -4,7 +4,7 @@ import {
   Package,
   Coffee as CoffeeIcon,
 } from 'phosphor-react'
-import { Coffee } from 'components/Coffee'
+import { CoffeeCard } from 'components/CoffeeCard'
 
 import {
   Main,
@@ -35,13 +35,13 @@ export function Home() {
               <ShoppingCart size={32} weight="fill" />
               Compra simples e segura
             </Label>
-            <Label backgroundSvg="yellow">
-              <Timer size={32} weight="fill" />
-              Entrega rápida e rastreada
-            </Label>
             <Label backgroundSvg="gray">
               <Package size={32} weight="fill" />
               Embalagem mantém o café intacto
+            </Label>
+            <Label backgroundSvg="yellow">
+              <Timer size={32} weight="fill" />
+              Entrega rápida e rastreada
             </Label>
             <Label backgroundSvg="purple">
               <CoffeeIcon size={32} weight="fill" />O café chega fresquinho até
@@ -56,7 +56,13 @@ export function Home() {
           <h2>Nossos cafés</h2>
         </Heading>
         <CoffeeList>
-          <Coffee />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
         </CoffeeList>
       </SectionCoffee>
     </Main>

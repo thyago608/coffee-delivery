@@ -11,7 +11,7 @@ import {
 import coffeeImg from 'assets/Image.svg'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
-export function Coffee() {
+export function CoffeeCard() {
   return (
     <Container>
       <img src={coffeeImg} alt="" />
