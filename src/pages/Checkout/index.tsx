@@ -2,6 +2,7 @@ import { MapPin, CreditCard, Money, Bank, CurrencyDollar } from 'phosphor-react'
 import { Input } from 'components/Input'
 import { PaymentButton } from 'components/PaymentButton'
 import { CartItem } from 'components/CartItem'
+import { useNavigate } from 'react-router-dom'
 import {
   Main,
   CompleteOrder,
@@ -21,6 +22,12 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const navigate = useNavigate()
+
+  function handleFinish() {
+    navigate('/success')
+  }
+
   return (
     <Main>
       <CompleteOrder>
@@ -116,7 +123,7 @@ export function Checkout() {
             <span>R$ 33,20</span>
           </label>
 
-          <ConfirmOrder>Confirmar Pedido</ConfirmOrder>
+          <ConfirmOrder onClick={handleFinish}>Confirmar Pedido</ConfirmOrder>
         </Totals>
       </CoffeeSelections>
     </Main>
