@@ -1,29 +1,35 @@
 import { ShoppingCart } from 'phosphor-react'
 import { AmountButtons } from 'components/AmountButtons'
+import { Coffee } from 'types/Coffee'
 import {
   Container,
   Label,
+  LabelList,
   Title,
   Description,
   Footer,
   Price,
   CartButton,
 } from './styles'
-import coffeeImg from 'assets/Image.svg'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  data: Coffee
+}
+
+export function CoffeeCard({ data }: CoffeeCardProps) {
   return (
     <Container>
-      <img src={coffeeImg} alt="" />
-      <Label>tradicional</Label>
-      <Title>Expresso Tradicional</Title>
-      <Description>
-        O tradicional café feito com água quente e grãos moídos
-      </Description>
+      <img src={data.image} alt={data.title} />
+      <LabelList>
+        {data.category.map((category) => (
+          <Label key={category}>{category}</Label>
+        ))}
+      </LabelList>
+      <Title>{data.title}</Title>
+      <Description>{data.description}</Description>
       <Footer>
         <Price>
-          R$
-          <span>9,90</span>
+          <span>{data.price}</span>
         </Price>
         <AmountButtons />
         <CartButton>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   Timer,
   ShoppingCart,
@@ -5,6 +6,8 @@ import {
   Coffee as CoffeeIcon,
 } from 'phosphor-react'
 import { CoffeeCard } from 'components/CoffeeCard'
+import { Coffee, CoffeeAPIResponse } from 'types/Coffee'
+import { v4 } from 'uuid'
 
 import {
   Main,
@@ -21,6 +24,30 @@ import {
 } from './styles'
 
 export function Home() {
+  const [coffees, setCoffees] = useState<Coffee[]>([])
+
+  useEffect(() => {
+    const fetchCoffees = async () => {
+      const response = await fetch('http://localhost:3333/coffees')
+      const coffees = await response.json()
+
+      const coffeesFormatted = coffees.map((coffee: CoffeeAPIResponse) => {
+        return {
+          ...coffee,
+          id: v4(),
+          price: new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(coffee.price),
+        }
+      })
+
+      setCoffees(coffeesFormatted)
+    }
+
+    fetchCoffees()
+  }, [])
+
   return (
     <Main>
       <SectionIntro>
@@ -56,13 +83,9 @@ export function Home() {
           <h2>Nossos cafés</h2>
         </Heading>
         <CoffeeList>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffees.map((coffee) => (
+            <CoffeeCard key={coffee.id} data={coffee} />
+          ))}
         </CoffeeList>
       </SectionCoffee>
     </Main>

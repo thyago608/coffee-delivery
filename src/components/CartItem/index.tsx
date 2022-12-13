@@ -1,4 +1,3 @@
-import coffeeImg from 'assets/Image.svg'
 import { AmountButtons } from 'components/AmountButtons'
 import { Trash } from 'phosphor-react'
 import {
@@ -12,7 +11,7 @@ import {
 export function CartItem() {
   return (
     <Container>
-      <img src={coffeeImg} alt="" />
+      <img src="" alt="" />
       <div>
         <Title>Expresso Tradicional</Title>
         <AmountContainer>

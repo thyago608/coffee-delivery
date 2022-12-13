@@ -20,6 +20,13 @@ export const Container = styled.div`
     margin-top: -1.5625rem;
   }
 `
+export const LabelList = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+`
 
 export const Label = styled.span`
   margin-top: 12px;
