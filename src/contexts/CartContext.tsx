@@ -56,7 +56,9 @@ export function CartProvider({ children }: CartProviderProps) {
           return produce(state, (draft) => {
             const amount = draft.cart[cartItemIndex].amount
 
-            if (amount > 0) {
+            if (amount === 1) {
+              draft.cart.splice(cartItemIndex, 1)
+            } else {
               draft.cart[cartItemIndex].amount--
             }
           })
@@ -72,21 +74,21 @@ export function CartProvider({ children }: CartProviderProps) {
   const { cart } = cartState
   const totalItems = cart.length
 
-  function addProductToCart(product: Coffee) {
+  const addProductToCart = (product: Coffee) => {
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',
       payload: product,
     })
   }
 
-  function removeProductUnitToCart(id: string) {
+  const removeProductUnitToCart = (id: string) => {
     dispatch({
       type: 'REMOVE_PRODUCT_UNIT',
       payload: id,
     })
   }
 
-  function unitsPerProduct(id: string) {
+  const unitsPerProduct = (id: string) => {
     const cartItem = cart.find((item) => item.product.id === id)
 
     return cartItem?.amount ?? 0

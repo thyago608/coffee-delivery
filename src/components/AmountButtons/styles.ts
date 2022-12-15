@@ -16,7 +16,12 @@ export const Container = styled.div`
   button {
     padding: 0.5rem;
 
-    &:hover {
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
       background: ${(props) => props.theme.colors['base-hover']};
 
       svg {

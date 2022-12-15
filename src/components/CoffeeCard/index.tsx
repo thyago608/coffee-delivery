@@ -21,13 +21,9 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
   const { addProductToCart, removeProductUnitToCart, unitsPerProduct } =
     useCart()
 
-  function handleAddProductToCart() {
-    addProductToCart(data)
-  }
+  const handleAddProductToCart = () => addProductToCart(data)
 
-  function handleRemoveProductToCart() {
-    removeProductUnitToCart(data.id)
-  }
+  const handleRemoveProductToCart = () => removeProductUnitToCart(data.id)
 
   const amountInCart = unitsPerProduct(data.id)
 

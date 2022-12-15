@@ -12,9 +12,15 @@ export function AmountButtons({
   onRemoveProductToCart,
   amountInCart,
 }: AmountButtonProps) {
+  const buttonMinusDisabled = amountInCart === 0
+
   return (
     <Container>
-      <button type="button" onClick={onRemoveProductToCart}>
+      <button
+        type="button"
+        onClick={onRemoveProductToCart}
+        disabled={buttonMinusDisabled}
+      >
         <Minus size={14} weight="bold" />
       </button>
       <span>{amountInCart}</span>
