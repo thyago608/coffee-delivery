@@ -1,5 +1,4 @@
 export interface Coffee {
-  id: string
   title: string
   category: string[]
   description: string

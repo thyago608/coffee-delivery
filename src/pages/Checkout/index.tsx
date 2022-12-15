@@ -20,9 +20,11 @@ import {
   Totals,
   ConfirmOrder,
 } from './styles'
+import { useCart } from 'hooks/useCart'
 
 export function Checkout() {
   const navigate = useNavigate()
+  const { cart, removeProductToCart } = useCart()
 
   function handleFinish() {
     navigate('/success')
@@ -100,12 +102,14 @@ export function Checkout() {
           <h2>Cafés selecionados</h2>
         </header>
         <CoffeeList>
-          <CartItemContainer>
-            <CartItem />
-          </CartItemContainer>
-          <CartItemContainer>
-            <CartItem />
-          </CartItemContainer>
+          {cart.map((item) => (
+            <CartItemContainer key={item.product.title}>
+              <CartItem
+                product={item.product}
+                removeProductToCart={removeProductToCart}
+              />
+            </CartItemContainer>
+          ))}
         </CoffeeList>
         <Totals>
           <label>

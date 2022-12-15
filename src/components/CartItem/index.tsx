@@ -1,5 +1,6 @@
 import { AmountButtons } from 'components/AmountButtons'
 import { Trash } from 'phosphor-react'
+import { Coffee } from 'types/Coffee'
 import {
   Container,
   AmountContainer,
@@ -8,21 +9,28 @@ import {
   Price,
 } from './styles'
 
-export function CartItem() {
+interface CartItemProps {
+  product: Coffee
+  removeProductToCart: (id: string) => void
+}
+
+export function CartItem({ product, removeProductToCart }: CartItemProps) {
+  const onRemoveProductToCart = () => removeProductToCart(product.id)
+
   return (
     <Container>
-      <img src="" alt="" />
+      <img src={product.image} alt={product.title} />
       <div>
-        <Title>Expresso Tradicional</Title>
+        <Title>{product.title}</Title>
         <AmountContainer>
-          <AmountButtons />
-          <RemoveButton>
+          <AmountButtons product={product} />
+          <RemoveButton onClick={onRemoveProductToCart}>
             <Trash size={15} />
             Remover
           </RemoveButton>
         </AmountContainer>
       </div>
-      <Price>R$ 9,90</Price>
+      <Price>{product.price}</Price>
     </Container>
   )
 }

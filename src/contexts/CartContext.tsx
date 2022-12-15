@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useCallback, useReducer } from 'react'
 import { produce } from 'immer'
 import { Coffee } from 'types/Coffee'
 
@@ -12,6 +12,7 @@ interface CartContextData {
   totalItems: number
   addProductToCart: (product: Coffee) => void
   removeProductUnitToCart: (id: string) => void
+  removeProductToCart: (id: string) => void
   unitsPerProduct: (id: string) => number
 }
 
@@ -31,26 +32,26 @@ export function CartProvider({ children }: CartProviderProps) {
       switch (action.type) {
         case 'ADD_PRODUCT_TO_CART': {
           const cartItemIndex = state.cart.findIndex(
-            (item) => item.product.id === action.payload.id,
+            (item) => item.product.title === action.payload.title,
           )
 
           if (cartItemIndex >= 0) {
             return produce(state, (draft) => {
               draft.cart[cartItemIndex].amount++
             })
-          } else {
-            return produce(state, (draft) => {
-              draft.cart.push({
-                product: action.payload,
-                amount: 1,
-              })
-            })
           }
+
+          return produce(state, (draft) => {
+            draft.cart.push({
+              product: action.payload,
+              amount: 1,
+            })
+          })
         }
 
         case 'REMOVE_PRODUCT_UNIT': {
           const cartItemIndex = state.cart.findIndex(
-            (item) => item.product.id === action.payload,
+            (item) => item.product.title === action.payload,
           )
 
           return produce(state, (draft) => {
@@ -61,6 +62,16 @@ export function CartProvider({ children }: CartProviderProps) {
             } else {
               draft.cart[cartItemIndex].amount--
             }
+          })
+        }
+
+        case 'REMOVE_PRODUCT_TO_CART': {
+          const cartItemIndex = state.cart.findIndex(
+            (item) => item.product.title === action.payload,
+          )
+
+          return produce(state, (draft) => {
+            draft.cart.splice(cartItemIndex, 1)
           })
         }
 
@@ -81,15 +92,22 @@ export function CartProvider({ children }: CartProviderProps) {
     })
   }
 
-  const removeProductUnitToCart = (id: string) => {
+  const removeProductUnitToCart = (title: string) => {
     dispatch({
       type: 'REMOVE_PRODUCT_UNIT',
-      payload: id,
+      payload: title,
     })
   }
 
-  const unitsPerProduct = (id: string) => {
-    const cartItem = cart.find((item) => item.product.id === id)
+  const removeProductToCart = (title: string) => {
+    dispatch({
+      type: 'REMOVE_PRODUCT_TO_CART',
+      payload: title,
+    })
+  }
+
+  const unitsPerProduct = (title: string) => {
+    const cartItem = cart.find((item) => item.product.title === title)
 
     return cartItem?.amount ?? 0
   }
@@ -101,6 +119,7 @@ export function CartProvider({ children }: CartProviderProps) {
         totalItems,
         addProductToCart,
         removeProductUnitToCart,
+        removeProductToCart,
         unitsPerProduct,
       }}
     >

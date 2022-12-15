@@ -18,14 +18,9 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ data }: CoffeeCardProps) {
-  const { addProductToCart, removeProductUnitToCart, unitsPerProduct } =
-    useCart()
+  const { addProductToCart } = useCart()
 
   const handleAddProductToCart = () => addProductToCart(data)
-
-  const handleRemoveProductToCart = () => removeProductUnitToCart(data.id)
-
-  const amountInCart = unitsPerProduct(data.id)
 
   return (
     <Container>
@@ -41,11 +36,7 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
         <Price>
           <span>{data.price}</span>
         </Price>
-        <AmountButtons
-          onAddProductToCart={handleAddProductToCart}
-          onRemoveProductToCart={handleRemoveProductToCart}
-          amountInCart={amountInCart}
-        />
+        <AmountButtons product={data} />
         <CartButton onClick={handleAddProductToCart}>
           <ShoppingCart size={22} weight="fill" />
         </CartButton>

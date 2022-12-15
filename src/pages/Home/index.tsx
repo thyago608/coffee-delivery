@@ -7,8 +7,6 @@ import {
 } from 'phosphor-react'
 import { CoffeeCard } from 'components/CoffeeCard'
 import { Coffee, CoffeeAPIResponse } from 'types/Coffee'
-import { v4 } from 'uuid'
-
 import {
   Main,
   CoffeeImage,
@@ -22,23 +20,19 @@ import {
   CoffeeList,
   Heading,
 } from './styles'
-import { useCart } from 'hooks/useCart'
+import { api } from 'services/api'
 
 export function Home() {
   const [coffees, setCoffees] = useState<Coffee[]>([])
-  const { cart } = useCart()
-
-  console.log(cart)
 
   useEffect(() => {
     const fetchCoffees = async () => {
-      const response = await fetch('http://localhost:3333/coffees')
-      const coffees = await response.json()
+      const response = await api<CoffeeAPIResponse[]>('http://localhost:3333/coffees')
+      const { data } = response
 
-      const coffeesFormatted = coffees.map((coffee: CoffeeAPIResponse) => {
+      const coffeesFormatted = data.map(coffee => {
         return {
           ...coffee,
-          id: v4(),
           price: new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
@@ -88,7 +82,7 @@ export function Home() {
         </Heading>
         <CoffeeList>
           {coffees.map((coffee) => (
-            <CoffeeCard key={coffee.id} data={coffee} />
+            <CoffeeCard key={coffee.title} data={coffee} />
           ))}
         </CoffeeList>
       </SectionCoffee>
