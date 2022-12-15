@@ -1,14 +1,24 @@
 import { Minus, Plus } from 'phosphor-react'
 import { Container } from './styles'
 
-export function AmountButtons() {
+interface AmountButtonProps {
+  onAddProductToCart: () => void
+  onRemoveProductToCart: () => void
+  amountInCart: number
+}
+
+export function AmountButtons({
+  onAddProductToCart,
+  onRemoveProductToCart,
+  amountInCart,
+}: AmountButtonProps) {
   return (
     <Container>
-      <button type="button">
+      <button type="button" onClick={onRemoveProductToCart}>
         <Minus size={14} weight="bold" />
       </button>
-      <span>1</span>
-      <button type="button">
+      <span>{amountInCart}</span>
+      <button type="button" onClick={onAddProductToCart}>
         <Plus size={14} weight="bold" />
       </button>
     </Container>

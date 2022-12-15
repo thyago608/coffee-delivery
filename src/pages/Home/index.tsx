@@ -22,9 +22,13 @@ import {
   CoffeeList,
   Heading,
 } from './styles'
+import { useCart } from 'hooks/useCart'
 
 export function Home() {
   const [coffees, setCoffees] = useState<Coffee[]>([])
+  const { cart } = useCart()
+
+  console.log(cart)
 
   useEffect(() => {
     const fetchCoffees = async () => {

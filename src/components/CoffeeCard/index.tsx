@@ -11,12 +11,26 @@ import {
   Price,
   CartButton,
 } from './styles'
+import { useCart } from 'hooks/useCart'
 
 interface CoffeeCardProps {
   data: Coffee
 }
 
 export function CoffeeCard({ data }: CoffeeCardProps) {
+  const { addProductToCart, removeProductUnitToCart, unitsPerProduct } =
+    useCart()
+
+  function handleAddProductToCart() {
+    addProductToCart(data)
+  }
+
+  function handleRemoveProductToCart() {
+    removeProductUnitToCart(data.id)
+  }
+
+  const amountInCart = unitsPerProduct(data.id)
+
   return (
     <Container>
       <img src={data.image} alt={data.title} />
@@ -31,8 +45,12 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
         <Price>
           <span>{data.price}</span>
         </Price>
-        <AmountButtons />
-        <CartButton>
+        <AmountButtons
+          onAddProductToCart={handleAddProductToCart}
+          onRemoveProductToCart={handleRemoveProductToCart}
+          amountInCart={amountInCart}
+        />
+        <CartButton onClick={handleAddProductToCart}>
           <ShoppingCart size={22} weight="fill" />
         </CartButton>
       </Footer>
