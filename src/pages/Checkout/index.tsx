@@ -46,8 +46,8 @@ const zeroBRL = new Intl.NumberFormat('pt-BR', {
 
 export function Checkout() {
   const navigate = useNavigate()
-  const [methodPayment, setMethodPayment] = useState<MethodsPayment>(null)
-  const { cart, removeProductToCart, totalItems } = useCart()
+  const [paymentMethod, setPaymentMethod] = useState<MethodsPayment>(null)
+  const { cart, removeProductToCart, totalItems, addDeliveryInformation } = useCart()
   const completeOrderForm = useForm<CompleteOrderFormData>({
     resolver: zodResolver(completeOrderSchema),
   })
@@ -55,8 +55,20 @@ export function Checkout() {
   const { handleSubmit } = completeOrderForm
 
   const onSubmit: SubmitHandler<CompleteOrderFormData> = (data) => {
+    const { city, district, number, street, uf } = data
 
+    if (paymentMethod) {
+      addDeliveryInformation({
+        city,
+        district,
+        number,
+        street,
+        uf,
+        paymentMethod
+      })
 
+      navigate("/success")
+    }
   }
 
   const valueTotalItens = cart.reduce((acc, currentValue) => {
@@ -112,24 +124,24 @@ export function Checkout() {
             </Heading>
             <OptionsPayment>
               <PaymentButton
-                selected={methodPayment === 'credit'}
-                onClick={() => setMethodPayment('credit')}
+                selected={paymentMethod === 'credit'}
+                onClick={() => setPaymentMethod('credit')}
                 disabled={isDisableFields}
               >
                 <CreditCard size={20} />
                 Cartão de crédito
               </PaymentButton>
               <PaymentButton
-                selected={methodPayment === 'debit'}
-                onClick={() => setMethodPayment('debit')}
+                selected={paymentMethod === 'debit'}
+                onClick={() => setPaymentMethod('debit')}
                 disabled={isDisableFields}
               >
                 <Bank size={20} />
                 Cartão de débito
               </PaymentButton>
               <PaymentButton
-                selected={methodPayment === 'money'}
-                onClick={() => setMethodPayment('money')}
+                selected={paymentMethod === 'money'}
+                onClick={() => setPaymentMethod('money')}
                 disabled={isDisableFields}
               >
                 <Money size={20} />

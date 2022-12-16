@@ -1,3 +1,4 @@
+import { useCart } from 'hooks/useCart'
 import {
   Main,
   ConfirmedOrder,
@@ -12,6 +13,8 @@ import {
 } from './styles'
 
 export function Success() {
+  const { delivery } = useCart()
+
   return (
     <Main>
       <ConfirmedOrder>

@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useCallback, useReducer } from 'react'
-import { produce } from 'immer'
+import { createContext, ReactNode, useReducer, useState } from 'react'
+import { addProductToCartAction, removeProductToCartAction, removeProductUnitAction } from 'reducers/Cart/actions'
+import { CartReducer } from 'reducers/Cart/reducer'
 import { Coffee } from 'types/Coffee'
 
 interface CartItem {
@@ -7,103 +8,53 @@ interface CartItem {
   amount: number
 }
 
+interface Delivery {
+  street: string
+  district: string
+  number: number
+  city: string
+  uf: string
+  paymentMethod: 'credit' | 'debit' | 'money'
+}
+
 interface CartContextData {
   cart: CartItem[]
   totalItems: number
+  delivery: Delivery | null
   addProductToCart: (product: Coffee) => void
   removeProductUnitToCart: (id: string) => void
   removeProductToCart: (id: string) => void
   unitsPerProduct: (id: string) => number
+  addDeliveryInformation: (information: Delivery) => void
 }
 
 interface CartProviderProps {
   children: ReactNode
 }
 
-interface CartState {
-  cart: CartItem[]
-}
-
 export const CartContext = createContext({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cartState, dispatch] = useReducer(
-    (state: CartState, action: any) => {
-      switch (action.type) {
-        case 'ADD_PRODUCT_TO_CART': {
-          const cartItemIndex = state.cart.findIndex(
-            (item) => item.product.title === action.payload.title,
-          )
-
-          if (cartItemIndex >= 0) {
-            return produce(state, (draft) => {
-              draft.cart[cartItemIndex].amount++
-            })
-          }
-
-          return produce(state, (draft) => {
-            draft.cart.push({
-              product: action.payload,
-              amount: 1,
-            })
-          })
-        }
-
-        case 'REMOVE_PRODUCT_UNIT': {
-          const cartItemIndex = state.cart.findIndex(
-            (item) => item.product.title === action.payload,
-          )
-
-          return produce(state, (draft) => {
-            const amount = draft.cart[cartItemIndex].amount
-
-            if (amount === 1) {
-              draft.cart.splice(cartItemIndex, 1)
-            } else {
-              draft.cart[cartItemIndex].amount--
-            }
-          })
-        }
-
-        case 'REMOVE_PRODUCT_TO_CART': {
-          const cartItemIndex = state.cart.findIndex(
-            (item) => item.product.title === action.payload,
-          )
-
-          return produce(state, (draft) => {
-            draft.cart.splice(cartItemIndex, 1)
-          })
-        }
-
-        default:
-          return state
-      }
-    },
+    CartReducer,
     { cart: [] },
   )
+
+  const [delivery, setDelivery] = useState<Delivery | null>(null)
 
   const { cart } = cartState
   const totalItems = cart.length
 
   const addProductToCart = (product: Coffee) => {
-    dispatch({
-      type: 'ADD_PRODUCT_TO_CART',
-      payload: product,
-    })
+    dispatch(addProductToCartAction(product))
   }
 
   const removeProductUnitToCart = (title: string) => {
-    dispatch({
-      type: 'REMOVE_PRODUCT_UNIT',
-      payload: title,
-    })
+    dispatch(removeProductUnitAction(title))
   }
 
   const removeProductToCart = (title: string) => {
-    dispatch({
-      type: 'REMOVE_PRODUCT_TO_CART',
-      payload: title,
-    })
+    dispatch(removeProductToCartAction(title))
   }
 
   const unitsPerProduct = (title: string) => {
@@ -112,15 +63,21 @@ export function CartProvider({ children }: CartProviderProps) {
     return cartItem?.amount ?? 0
   }
 
+  const addDeliveryInformation = (information: Delivery) => {
+    setDelivery(information)
+  }
+
   return (
     <CartContext.Provider
       value={{
         cart,
+        delivery,
         totalItems,
         addProductToCart,
         removeProductUnitToCart,
         removeProductToCart,
         unitsPerProduct,
+        addDeliveryInformation
       }}
     >
       {children}
