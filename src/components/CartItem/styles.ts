@@ -22,7 +22,6 @@ export const AmountContainer = styled.div`
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
 `
 
 export const RemoveButton = styled.button`
