@@ -68,6 +68,33 @@ export const LabelsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  background: linear-gradient(100deg, rgba(235,193,54,1) 6%, rgba(128,71,248,1) 96%);
+  border:0;
+  position: relative;
+
+  border-radius: 6px 36px 6px 36px;
+
+  z-index:1;
+
+  &:before{
+    content: "";
+
+    display: block;
+    background: ${(props) => props.theme.colors.background};
+
+    position: absolute;
+    top: 1px;
+    left: 1px;
+
+    width: calc(100% - calc(1px * 2));
+    height: calc(100% - calc(1px * 2));
+    border-radius: 5px 35px 5px 35px;
+
+    z-index: -1;
+  }
+
+
 `
 
 export const Label = styled.div`
