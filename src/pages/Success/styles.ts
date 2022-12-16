@@ -10,6 +10,7 @@ export const Main = styled.main`
 
   display: grid;
   justify-items: center;
+  align-items: center;
   gap: 2rem;
 
   @media (min-width: 1024px) {
@@ -36,6 +37,7 @@ export const ConfirmedOrder = styled.section`
       }
     }
   }
+
 `
 
 const BaseIcon = css`
@@ -115,8 +117,13 @@ export const Text = styled.p`
 export const Illustration = styled.div`
   width: 100%;
   height: 293px;
+  align-self: flex-end;
 
   background: url(${illustrationImg}) no-repeat center;
 
   background-size: contain;
+
+  @media(min-width:1024px){
+    margin-top: 8rem;
+  }
 `
