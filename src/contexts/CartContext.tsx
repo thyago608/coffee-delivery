@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useReducer, useState } from 'react'
-import { addProductToCartAction, removeProductToCartAction, removeProductUnitAction } from 'reducers/Cart/actions'
+import { addProductToCartAction, removeProductToCartAction, removeProductUnitAction, clearCartAction } from 'reducers/Cart/actions'
 import { CartReducer } from 'reducers/Cart/reducer'
 import { Coffee } from 'types/Coffee'
 
@@ -24,6 +24,7 @@ interface CartContextData {
   addProductToCart: (product: Coffee) => void
   removeProductUnitToCart: (id: string) => void
   removeProductToCart: (id: string) => void
+  clearCart: () => void
   unitsPerProduct: (id: string) => number
   addDeliveryInformation: (information: Delivery) => void
 }
@@ -57,6 +58,8 @@ export function CartProvider({ children }: CartProviderProps) {
     dispatch(removeProductToCartAction(title))
   }
 
+  const clearCart = () => dispatch(clearCartAction())
+
   const unitsPerProduct = (title: string) => {
     const cartItem = cart.find((item) => item.product.title === title)
 
@@ -71,12 +74,13 @@ export function CartProvider({ children }: CartProviderProps) {
     <CartContext.Provider
       value={{
         cart,
-        delivery,
         totalItems,
         addProductToCart,
         removeProductUnitToCart,
         removeProductToCart,
+        clearCart,
         unitsPerProduct,
+        delivery,
         addDeliveryInformation
       }}
     >

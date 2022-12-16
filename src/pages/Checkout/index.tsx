@@ -37,7 +37,7 @@ const completeOrderSchema = zod.object({
 
 type CompleteOrderFormData = zod.infer<typeof completeOrderSchema>
 
-type MethodsPayment = 'credit' | 'debit' | 'money' | null
+type MethodsPayment = 'credit' | 'debit' | 'money'
 
 const zeroBRL = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -46,8 +46,8 @@ const zeroBRL = new Intl.NumberFormat('pt-BR', {
 
 export function Checkout() {
   const navigate = useNavigate()
-  const [paymentMethod, setPaymentMethod] = useState<MethodsPayment>(null)
-  const { cart, removeProductToCart, totalItems, addDeliveryInformation } = useCart()
+  const [paymentMethod, setPaymentMethod] = useState<MethodsPayment>('' as MethodsPayment)
+  const { cart, removeProductToCart, totalItems, addDeliveryInformation, clearCart } = useCart()
   const completeOrderForm = useForm<CompleteOrderFormData>({
     resolver: zodResolver(completeOrderSchema),
   })
@@ -67,6 +67,7 @@ export function Checkout() {
         paymentMethod
       })
 
+      clearCart()
       navigate("/success")
     }
   }
@@ -124,6 +125,7 @@ export function Checkout() {
             </Heading>
             <OptionsPayment>
               <PaymentButton
+                type='button'
                 selected={paymentMethod === 'credit'}
                 onClick={() => setPaymentMethod('credit')}
                 disabled={isDisableFields}
@@ -132,6 +134,7 @@ export function Checkout() {
                 Cartão de crédito
               </PaymentButton>
               <PaymentButton
+                type='button'
                 selected={paymentMethod === 'debit'}
                 onClick={() => setPaymentMethod('debit')}
                 disabled={isDisableFields}
@@ -140,6 +143,7 @@ export function Checkout() {
                 Cartão de débito
               </PaymentButton>
               <PaymentButton
+                type='button'
                 selected={paymentMethod === 'money'}
                 onClick={() => setPaymentMethod('money')}
                 disabled={isDisableFields}

@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom'
 import { useCart } from 'hooks/useCart'
 import {
   Main,
@@ -15,6 +16,10 @@ import {
 export function Success() {
   const { delivery } = useCart()
 
+  if (!delivery) {
+    return <Navigate to='/' />
+  }
+
   return (
     <Main>
       <ConfirmedOrder>
@@ -27,9 +32,9 @@ export function Success() {
             <MapPinIcon size={32} weight="fill" />
             <TextGroup>
               <Text>
-                Entrega em <span>Rua João Daniel Martinelli, 102</span>
+                Entrega em <span>Rua {delivery?.street}, {delivery?.number}</span>
               </Text>
-              <Text>Farrapos - Porto Alegre, RS</Text>
+              <Text>{delivery?.district} - {delivery?.city}, {delivery?.uf}</Text>
             </TextGroup>
           </Label>
 
@@ -42,13 +47,14 @@ export function Success() {
               </Text>
             </TextGroup>
           </Label>
-
           <Label>
             <CurrencyDollarIcon size={32} weight="fill" />
             <TextGroup>
               <Text>Pagamento na entrega</Text>
               <Text>
-                <span>Cartão de Crédito</span>
+                {delivery?.paymentMethod === 'credit' && <span>Cartão de Crédito</span>}
+                {delivery?.paymentMethod === 'debit' && <span>Cartão de Débito</span>}
+                {delivery?.paymentMethod === 'money' && <span>Dinheiro</span>}
               </Text>
             </TextGroup>
           </Label>

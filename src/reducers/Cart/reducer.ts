@@ -13,7 +13,7 @@ interface CartState {
 
 interface Action {
     type: keyof typeof ActionType
-    payload: any
+    payload?: any
 }
 
 export function CartReducer(state: CartState, action: Action) {
@@ -60,6 +60,12 @@ export function CartReducer(state: CartState, action: Action) {
 
             return produce(state, (draft) => {
                 draft.cart.splice(cartItemIndex, 1)
+            })
+        }
+
+        case ActionType.CLEAR_CART: {
+            return produce(state, draft => {
+                draft.cart = []
             })
         }
 
