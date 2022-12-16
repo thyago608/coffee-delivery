@@ -39,11 +39,13 @@ export function Home() {
           }).format(coffee.price),
         }
       })
-
       setCoffees(coffeesFormatted)
+
+
     }
 
     fetchCoffees()
+
   }, [])
 
   return (
