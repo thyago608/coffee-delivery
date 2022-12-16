@@ -26,7 +26,7 @@ export function Header() {
           const latitude = locationResponse.coords.latitude
           const longitude = locationResponse.coords.longitude
 
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBiqv1CbFdr3AsoUl38Tmc5GvhIunnBUv8`).
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${import.meta.env.VITE_GOOGLE_API_KEY}`).
             then(response => response.json())
             .then(data => setLocationData(data))
         })
