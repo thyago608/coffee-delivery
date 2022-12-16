@@ -15,7 +15,7 @@ interface CartItemProps {
 }
 
 export function CartItem({ product, removeProductToCart }: CartItemProps) {
-  const onRemoveProductToCart = () => removeProductToCart(product.id)
+  const onRemoveProductToCart = () => removeProductToCart(product.title)
 
   return (
     <Container>
@@ -30,7 +30,7 @@ export function CartItem({ product, removeProductToCart }: CartItemProps) {
           </RemoveButton>
         </AmountContainer>
       </div>
-      <Price>{product.price}</Price>
+      <Price>{product.priceFormatted}</Price>
     </Container>
   )
 }

@@ -31,6 +31,10 @@ export const Input = styled.input<InputProps>`
       text-transform: capitalize;
     }
 
+    &:disabled{
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
     ${props => props.error && css`
         border: 1px solid red;

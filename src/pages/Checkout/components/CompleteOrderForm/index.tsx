@@ -1,11 +1,12 @@
+import { useCart } from 'hooks/useCart'
 import { useFormContext } from 'react-hook-form'
 import { FormContainer, InputContainer, Input, InputBlock } from './styles'
 
 export function CompleteOrderForm() {
-    const { register, watch, formState } = useFormContext()
+    const { register, formState } = useFormContext()
+    const { totalItems } = useCart()
 
-    console.log(formState.errors)
-
+    const isDisableField = totalItems === 0
 
     return (
         <FormContainer>
@@ -15,12 +16,14 @@ export function CompleteOrderForm() {
                     placeholder="CEP"
                     min={0}
                     error={!!formState.errors.zipcode}
+                    disabled={isDisableField}
                     {...register('zipcode', { valueAsNumber: true, required: true })}
                 />
             </InputBlock>
             <Input
                 placeholder="Rua"
                 error={!!formState.errors.street}
+                disabled={isDisableField}
                 {...register('street', { required: true })}
             />
             <InputContainer>
@@ -30,6 +33,7 @@ export function CompleteOrderForm() {
                         placeholder="Número"
                         min={0}
                         error={!!formState.errors.number}
+                        disabled={isDisableField}
                         {...register('number', { valueAsNumber: true, required: true })}
                     />
                 </InputBlock>
@@ -37,6 +41,7 @@ export function CompleteOrderForm() {
                     <Input
                         placeholder="Complemento"
                         error={!!formState.errors.complement}
+                        disabled={isDisableField}
                         {...register('complement')}
                     />
                 </InputBlock>
@@ -47,6 +52,7 @@ export function CompleteOrderForm() {
                     <Input
                         placeholder="Bairro"
                         error={!!formState.errors.district}
+                        disabled={isDisableField}
                         {...register('district', { required: true })}
                     />
                 </InputBlock>
@@ -54,6 +60,7 @@ export function CompleteOrderForm() {
                     <Input
                         placeholder="Cidade"
                         error={!!formState.errors.city}
+                        disabled={isDisableField}
                         {...register('city', { required: true })}
                     />
                 </InputBlock>
@@ -61,6 +68,7 @@ export function CompleteOrderForm() {
                     <Input
                         placeholder="UF"
                         error={!!formState.errors.uf}
+                        disabled={isDisableField}
                         {...register('uf', { required: true })}
                     />
                 </InputBlock>

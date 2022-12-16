@@ -33,7 +33,7 @@ export function Home() {
       const coffeesFormatted = data.map(coffee => {
         return {
           ...coffee,
-          price: new Intl.NumberFormat('pt-BR', {
+          priceFormatted: new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }).format(coffee.price),

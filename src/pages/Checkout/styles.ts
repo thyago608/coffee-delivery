@@ -156,7 +156,12 @@ export const ConfirmOrder = styled.button`
 
   transition: background 0.3s ease;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: ${(props) => props.theme.colors['yellow-dark']};
+  }
+
+  &:disabled{
+    opacity: 0.5;
+    cursor:not-allowed;
   }
 `

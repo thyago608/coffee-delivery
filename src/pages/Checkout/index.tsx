@@ -23,6 +23,7 @@ import {
 } from './styles'
 
 import { CompleteOrderForm } from './components/CompleteOrderForm'
+import { useState } from 'react'
 
 const completeOrderSchema = zod.object({
   zipcode: zod.number().positive().min(5),
@@ -36,19 +37,48 @@ const completeOrderSchema = zod.object({
 
 type CompleteOrderFormData = zod.infer<typeof completeOrderSchema>
 
+type MethodsPayment = 'credit' | 'debit' | 'money' | null
+
+const zeroBRL = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL'
+}).format(0)
+
 export function Checkout() {
   const navigate = useNavigate()
-  const { cart, removeProductToCart } = useCart()
+  const [methodPayment, setMethodPayment] = useState<MethodsPayment>(null)
+  const { cart, removeProductToCart, totalItems } = useCart()
   const completeOrderForm = useForm<CompleteOrderFormData>({
     resolver: zodResolver(completeOrderSchema),
   })
 
-  const { handleSubmit, formState } = completeOrderForm
+  const { handleSubmit } = completeOrderForm
 
   const onSubmit: SubmitHandler<CompleteOrderFormData> = (data) => {
-    console.log(data)
+
+
   }
 
+  const valueTotalItens = cart.reduce((acc, currentValue) => {
+    const amount = currentValue.amount
+    const price = currentValue.product.price
+
+    acc += amount * price
+    return acc
+  }, 0)
+
+  const valueTotalItensFormatted = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valueTotalItens)
+
+  const valueTotal = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valueTotalItens + 3.5)
+
+  const totalAmountToShow = totalItems === 0 ? zeroBRL : valueTotal
+  const isDisableFields = totalItems === 0
 
   return (
     <Main>
@@ -81,15 +111,27 @@ export function Checkout() {
               </TextGroup>
             </Heading>
             <OptionsPayment>
-              <PaymentButton>
+              <PaymentButton
+                selected={methodPayment === 'credit'}
+                onClick={() => setMethodPayment('credit')}
+                disabled={isDisableFields}
+              >
                 <CreditCard size={20} />
                 Cartão de crédito
               </PaymentButton>
-              <PaymentButton>
+              <PaymentButton
+                selected={methodPayment === 'debit'}
+                onClick={() => setMethodPayment('debit')}
+                disabled={isDisableFields}
+              >
                 <Bank size={20} />
                 Cartão de débito
               </PaymentButton>
-              <PaymentButton>
+              <PaymentButton
+                selected={methodPayment === 'money'}
+                onClick={() => setMethodPayment('money')}
+                disabled={isDisableFields}
+              >
                 <Money size={20} />
                 Dinheiro
               </PaymentButton>
@@ -114,7 +156,7 @@ export function Checkout() {
           <Totals>
             <label>
               Total de itens
-              <span>R$ 29,70</span>
+              <span>{valueTotalItensFormatted}</span>
             </label>
 
             <label>
@@ -124,10 +166,12 @@ export function Checkout() {
 
             <label>
               Total
-              <span>R$ 33,20</span>
+              <span>{totalAmountToShow}</span>
             </label>
-            <ConfirmOrder type="submit">Confirmar Pedido</ConfirmOrder>
-
+            <ConfirmOrder
+              type="submit"
+              disabled={isDisableFields}
+            >Confirmar Pedido</ConfirmOrder>
           </Totals>
         </CoffeeSelections>
       </form>

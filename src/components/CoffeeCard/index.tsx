@@ -34,7 +34,7 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
       <Description>{data.description}</Description>
       <Footer>
         <Price>
-          <span>{data.price}</span>
+          <span>{data.priceFormatted}</span>
         </Price>
         <AmountButtons product={data} />
         <CartButton onClick={handleAddProductToCart}>

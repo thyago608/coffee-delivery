@@ -3,9 +3,8 @@ export interface Coffee {
   category: string[]
   description: string
   image: string
-  price: string
+  price: number
+  priceFormatted: string
 }
 
-export type CoffeeAPIResponse = Omit<Coffee, 'id'> & {
-  price: number
-}
+export type CoffeeAPIResponse = Omit<Coffee, 'priceFormatted'>
