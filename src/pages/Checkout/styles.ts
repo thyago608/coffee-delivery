@@ -6,15 +6,18 @@ export const Main = styled.main`
 
   padding: 2rem 1rem;
 
-  display: grid;
-  gap: 2rem;
-
   @media (min-width: 768px) {
     padding: 2rem;
   }
 
-  @media (min-width: 1024px) {
+  > form{
+    display: grid;
+    gap: 2rem;
+
+    @media (min-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
   }
 `
 
@@ -54,39 +57,6 @@ export const TextGroup = styled.div`
 
   p {
     color: ${(props) => props.theme.colors['base-text']};
-  }
-`
-
-export const Form = styled.form`
-  margin-top: 2rem;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-`
-
-export const InputBlock = styled.div`
-  width: 100%;
-
-  @media (min-width: 768px) {
-    &:not(.city) {
-      flex: none;
-      max-width: 200px;
-    }
-
-    &.uf {
-      max-width: 60px;
-    }
   }
 `
 

@@ -11,6 +11,7 @@
     "server": "json-server -p 3333 ./server.json"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.2.1",
     "eslint": "^8.29.0",
@@ -18,9 +19,11 @@
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.40.0",
     "react-router-dom": "^6.4.5",
     "styled-components": "^5.3.6",
-    "vite-tsconfig-paths": "^4.0.2"
+    "vite-tsconfig-paths": "^4.0.2",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.1.3",
